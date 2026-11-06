@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>הרשמה להתנדבות · יום ספורט 2026</title>
+<meta property="og:title" content="יום ספורט 2026 – הרשמה להורים מתנדבים">
+<meta property="og:description" content="בית הספר הירוק ע״ש שמעון פרס · יום שישי 27/11">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Rubik:wght@500;700;800&family=Heebo:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#173d22; --ink-2:#2f5a38; --muted:#6b7f6f; --line:#dfe9d3;
+    --bg:#f7faf0; --card:#ffffff; --green:#2e8b3a; --green-d:#1f6a2e; --lime:#c9e58a; --lime-soft:#eef7dc;
+    --coral:#e05a3a; --coral-soft:#fde9e3; --yellow:#f5c21b; --orange:#f39a1e; --sky:#a9d8f2; --pink:#e46a9a; --radius:22px;
+  }
+  *{box-sizing:border-box}
+  [hidden]{display:none!important}
+  html,body{margin:0}
+  body{font-family:Heebo,system-ui,sans-serif;background:var(--bg);color:var(--ink);line-height:1.5;-webkit-font-smoothing:antialiased;
+    background-image:radial-gradient(circle at 100% 0,rgba(201,229,138,.45),transparent 40%),radial-gradient(circle at 0 30%,rgba(169,216,242,.35),transparent 35%)}
+  .wrap{max-width:720px;margin:0 auto;padding:18px 16px 60px}
+  h1,h2,h3{font-family:Rubik,Heebo,sans-serif;margin:0}
+
+  /* hero – בהשראת הפלייר */
+  .hero{position:relative;overflow:hidden;background:#fff;border-radius:30px;padding:26px 24px 120px;margin-bottom:18px;text-align:center;
+    box-shadow:0 18px 40px -28px rgba(23,61,34,.55)}
+  .hero .logo{position:absolute;top:14px;right:14px;width:80px;height:80px;object-fit:contain;mix-blend-mode:multiply}
+  .leaf{position:absolute;pointer-events:none}
+  .hero .plogo{position:absolute;top:16px;left:16px;height:76px;width:auto}
+  .std{display:inline-block;position:relative;margin-top:62px;font-family:Rubik;font-weight:800;font-size:15px;letter-spacing:.06em;color:#fff;padding:7px 20px;
+    background:var(--green-d);border-radius:6px 18px 8px 16px;transform:rotate(-2deg)}
+  .std em{font-style:normal;color:var(--lime)}
+  .hero h1{position:relative;display:inline-block;font-size:clamp(46px,11vw,72px);font-weight:800;line-height:1;margin:18px 0 6px;color:var(--ink);padding:0 14px}
+  .hero h1::before{content:"";position:absolute;inset:44% -4px -2px -4px;background:var(--lime);border-radius:40px 10px 30px 14px;z-index:-1;transform:rotate(-1deg)}
+  .hero h1{z-index:0}
+  .school{font-family:Rubik;font-weight:700;font-size:clamp(19px,4.6vw,25px);color:var(--ink)}
+  .datebox{display:inline-flex;align-items:center;gap:16px;margin-top:18px;background:var(--lime-soft);border-radius:22px;padding:10px 22px}
+  .datebox .d1{font-family:Rubik;font-weight:700;font-size:16px;color:var(--ink-2);line-height:1.1}
+  .datebox .d2{font-family:Rubik;font-weight:800;font-size:38px;line-height:1;color:var(--ink)}
+  .datebox .sep{width:2px;align-self:stretch;background:var(--green);opacity:.5}
+  .hero .cta{display:block;margin:16px auto 0;font-family:Rubik;font-weight:700;font-size:20px;color:var(--ink)}
+  .hero .cta svg{vertical-align:-4px;margin-left:6px}
+  .scene{position:absolute;left:0;right:0;bottom:0;width:100%;height:120px;display:block}
+  .burst{position:absolute;width:34px;height:34px;pointer-events:none}
+
+  .card{background:var(--card);border-radius:var(--radius);padding:24px 22px;margin-bottom:14px;box-shadow:0 1px 0 rgba(23,61,34,.04),0 10px 26px -20px rgba(23,61,34,.45)}
+  .step{display:flex;align-items:center;gap:12px;margin-bottom:18px}
+  .step b{flex:none;width:34px;height:34px;border-radius:12px 16px 10px 14px;background:var(--lime);color:var(--ink);display:grid;place-items:center;font-family:Rubik;font-size:16px}
+  .step h2{font-size:21px;font-weight:800}
+  .step small{display:block;color:var(--muted);font-size:13.5px;font-weight:400;font-family:Heebo}
+
+  label.f{display:block;margin-bottom:16px}
+  label.f > span{display:block;font-weight:600;font-size:14.5px;margin-bottom:6px}
+  label.f > span em{color:var(--coral);font-style:normal}
+  input[type=text],input[type=tel],textarea{width:100%;font:inherit;font-size:16px;color:var(--ink);background:#f8fbf2;border:1.5px solid var(--line);border-radius:14px;padding:12px 14px;transition:border-color .15s,background .15s}
+  input:focus,textarea:focus{outline:none;border-color:var(--green);background:#fff;box-shadow:0 0 0 4px rgba(46,139,58,.12)}
+  textarea{min-height:84px;resize:vertical}
+  .row2{display:grid;grid-template-columns:1fr 120px;gap:12px}
+  .klabel{display:block;font-weight:600;font-size:14.5px;margin-bottom:6px}
+  .klabel em{color:var(--coral);font-style:normal}
+  .kid{display:grid;grid-template-columns:1fr 110px 36px;gap:10px;align-items:start;padding:12px;border:1.5px dashed var(--line);border-radius:16px;margin-bottom:10px}
+  .kid.solo{grid-template-columns:1fr 110px;border:none;padding:0}
+  .kid .kn{grid-column:1/-1;font-size:12.5px;color:var(--muted);font-weight:700;margin-bottom:-4px}
+  .kid .rm{width:36px;height:46px;border:none;background:none;color:var(--muted);font-size:22px;cursor:pointer;border-radius:10px}
+  .kid .rm:hover{background:var(--coral-soft);color:var(--coral)}
+  .addkid{font:inherit;font-weight:600;font-size:14px;color:var(--green-d);background:var(--lime-soft);border:none;border-radius:12px;padding:9px 14px;cursor:pointer;margin-top:4px}
+  @media (max-width:480px){ .kid{grid-template-columns:1fr 80px 32px} .kid.solo{grid-template-columns:1fr 84px} }
+  .chips{display:flex;flex-wrap:wrap;gap:8px}
+  .chip{font:inherit;font-family:Rubik;font-weight:700;font-size:16px;min-width:48px;height:46px;padding:0 12px;border-radius:14px;border:1.5px solid var(--line);background:#f8fbf2;color:var(--ink);cursor:pointer;transition:all .15s}
+  .chip:hover{border-color:var(--green)}
+  .chip[aria-pressed=true]{background:var(--green-d);border-color:var(--green-d);color:#fff}
+  .err{color:var(--coral);font-size:13px;margin-top:5px;display:none}
+  .invalid .err{display:block}
+  .invalid input,.invalid .chip{border-color:var(--coral)}
+
+  /* slots */
+  .group{margin-top:22px}
+  .group:first-of-type{margin-top:0}
+  .ghead{display:flex;align-items:center;gap:10px;margin-bottom:10px;color:var(--green-d);font-family:Rubik;font-size:14px;font-weight:700}
+  .ghead i{width:9px;height:9px;border-radius:50%;background:var(--yellow);display:block}
+  .ghead::after{content:"";flex:1;height:2px;border-radius:2px;background:var(--lime-soft)}
+  .slot{position:relative;display:flex;gap:14px;align-items:flex-start;width:100%;text-align:right;font:inherit;color:inherit;background:#f8fbf2;border:1.5px solid var(--line);border-radius:18px;padding:14px 14px 12px;margin-bottom:10px;cursor:pointer;transition:all .15s}
+  .slot:hover{border-color:var(--green);background:#fff}
+  .slot .tick{flex:none;width:26px;height:26px;border-radius:9px;border:1.5px solid #bfd3b3;background:#fff;display:grid;place-items:center;margin-top:2px;transition:all .15s}
+  .slot .tick svg{width:16px;height:16px;opacity:0;transition:opacity .15s}
+  .slot[aria-pressed=true]{background:#fff;border-color:var(--green);box-shadow:0 0 0 4px rgba(46,139,58,.12)}
+  .slot[aria-pressed=true] .tick{background:var(--green);border-color:var(--green)}
+  .slot[aria-pressed=true] .tick svg{opacity:1}
+  .slot[disabled]{cursor:not-allowed;opacity:.5}
+  .slot[disabled]:hover{border-color:var(--line);background:#f8fbf2}
+  .sbody{flex:1;min-width:0}
+  .stop{display:flex;justify-content:space-between;gap:10px;align-items:baseline;flex-wrap:wrap}
+  .stitle{font-family:Rubik;font-weight:700;font-size:16.5px}
+  .stime{font-family:Rubik;font-weight:600;font-size:14px;color:var(--ink);direction:ltr;unicode-bidi:isolate;background:var(--lime-soft);padding:2px 10px;border-radius:9px}
+  .sdesc{color:var(--muted);font-size:14px;margin-top:2px}
+  .cap{display:flex;align-items:center;gap:10px;margin-top:10px;font-size:12.5px;color:var(--muted)}
+  .bar{flex:1;height:7px;border-radius:9px;background:#e8efdf;overflow:hidden;max-width:220px}
+  .bar i{display:block;height:100%;border-radius:9px;background:linear-gradient(90deg,var(--green),#7cc04a)}
+  .cap.full .bar i{background:var(--green-d)}
+  .cap .note{font-weight:600}
+  .cap.full .note{color:var(--green-d)}
+  .conf{font-size:12.5px;color:var(--coral);margin-top:6px}
+
+  .submit{width:100%;font:inherit;font-family:Rubik;font-weight:800;font-size:19px;color:#fff;background:var(--green-d);border:none;border-radius:18px 24px 16px 22px;padding:17px;cursor:pointer;box-shadow:0 12px 26px -12px rgba(31,106,46,.9);transition:transform .1s,filter .15s}
+  .submit:hover{filter:brightness(1.1)}
+  .submit:active{transform:translateY(1px)}
+  .submit[disabled]{opacity:.6;cursor:wait}
+  .privacy{display:flex;gap:8px;justify-content:center;align-items:center;color:var(--muted);font-size:13px;margin-top:14px}
+  .formerr{background:var(--coral-soft);color:#a7321f;border-radius:12px;padding:12px 14px;margin-bottom:12px;font-size:14.5px;display:none}
+
+  /* done */
+  .done{text-align:center;padding:36px 24px}
+  .done .big{width:78px;height:78px;border-radius:50%;background:var(--green);margin:0 auto 18px;display:grid;place-items:center;box-shadow:0 12px 30px -12px rgba(46,139,58,.9)}
+  .done h2{font-size:30px;font-weight:800;margin-bottom:6px}
+  .done p{color:var(--ink-2);margin:6px 0}
+  .arrive{display:inline-block;margin:16px 0 10px;background:var(--lime);color:var(--ink);border-radius:16px 22px 14px 20px;padding:12px 22px;font-family:Rubik;font-weight:800;font-size:20px}
+  .summary{text-align:right;margin:18px auto 6px;max-width:420px;border-top:1px solid var(--line)}
+  .summary div{display:flex;justify-content:space-between;gap:12px;padding:10px 2px;border-bottom:1px solid var(--line);font-size:15px}
+  .summary span:last-child{color:var(--muted);direction:ltr;unicode-bidi:isolate;white-space:nowrap}
+  .ghost{font:inherit;font-weight:600;color:var(--ink);background:none;border:1.5px solid var(--line);border-radius:12px;padding:10px 18px;margin-top:18px;cursor:pointer}
+
+  /* dialog */
+  .scrim{position:fixed;inset:0;background:rgba(18,40,24,.45);display:none;align-items:center;justify-content:center;padding:20px;z-index:10}
+  .scrim.on{display:flex}
+  .dlg{background:#fff;border-radius:22px;padding:24px;max-width:380px;width:100%}
+  .dlg h3{font-size:19px;margin-bottom:8px}
+  .dlg p{color:var(--ink-2);margin:0 0 18px}
+  .dlg .btns{display:flex;gap:10px}
+  .dlg button{flex:1;font:inherit;font-weight:600;border-radius:12px;padding:12px;cursor:pointer;border:1.5px solid var(--line);background:#fff;color:var(--ink)}
+  .dlg button.pri{background:var(--green-d);border-color:var(--green-d);color:#fff}
+
+  .skeleton{height:84px;border-radius:18px;background:linear-gradient(90deg,#eef4e6,#f8fbf2,#eef4e6);background-size:200% 100%;animation:sh 1.2s infinite;margin-bottom:10px}
+  @keyframes sh{to{background-position:-200% 0}}
+  .demo{font-size:12px;text-align:center;color:var(--muted);margin-bottom:10px}
+  @media (max-width:480px){ .card{padding:20px 16px} .hero{padding:22px 16px 110px} .row2{grid-template-columns:1fr 96px} .hero .logo{width:62px;height:62px} .hero .plogo{height:60px;top:14px;left:14px} }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div id="demoNote" class="demo" hidden>תצוגה מקדימה – ההרשמה לא נשמרת</div>
+
+  <header class="hero">
+    <img class="logo" alt="בית ספר הירוק" src="data:image/jpeg;base64,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">
+    <img class="plogo" alt="הנהגת ההורים" src="data:image/png;base64,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">
+    <svg class="burst" style="top:150px;right:22px" viewBox="0 0 34 34" aria-hidden="true"><g stroke-width="4" stroke-linecap="round"><path d="M17 2v8" stroke="#f5c21b"/><path d="M30 10l-7 4" stroke="#8cc63f"/><path d="M4 10l7 4" stroke="#a9d8f2"/></g></svg>
+    <svg class="burst" style="top:150px;left:22px;transform:scaleX(-1)" viewBox="0 0 34 34" aria-hidden="true"><g stroke-width="4" stroke-linecap="round"><path d="M17 2v8" stroke="#f39a1e"/><path d="M30 10l-7 4" stroke="#8cc63f"/><path d="M4 10l7 4" stroke="#f5c21b"/></g></svg>
+
+    <span class="std">הרשמה <em>למתנדבים</em></span><br>
+    <h1 id="title">יום ספורט</h1>
+    <div class="school" id="school">בבית הספר שמעון פרס</div>
+    <div class="datebox">
+      <svg width="38" height="38" viewBox="0 0 24 24" fill="none" stroke="#173d22" stroke-width="1.8"><rect x="3" y="5" width="18" height="16" rx="3"/><path d="M3 10h18M8 3v4M16 3v4"/><circle cx="8" cy="14" r=".6" fill="#173d22"/><circle cx="12" cy="14" r=".6" fill="#173d22"/><circle cx="16" cy="14" r=".6" fill="#173d22"/><circle cx="8" cy="17.5" r=".6" fill="#173d22"/><circle cx="12" cy="17.5" r=".6" fill="#173d22"/></svg>
+      <span class="sep"></span>
+      <div><div class="d1" id="dDay">ביום שישי</div><div class="d2" id="dDate">27/11</div></div>
+    </div>
+    <span class="cta"><svg width="24" height="24" viewBox="0 0 24 24"><path d="M12 21s-7-4.5-9.3-9A5.2 5.2 0 0 1 12 6.3 5.2 5.2 0 0 1 21.3 12C19 16.5 12 21 12 21z" fill="none" stroke="#e46a9a" stroke-width="2.4" stroke-linejoin="round"/></svg>נשמח למתנדבים!</span>
+
+    <svg class="scene" viewBox="0 0 720 120" preserveAspectRatio="none" aria-hidden="true">
+      <path d="M0 58 C 120 20, 240 40, 360 50 S 600 30, 720 46 V120 H0Z" fill="#cfe7a3"/>
+      <path d="M0 78 C 160 50, 320 70, 460 66 S 640 56, 720 64 V120 H0Z" fill="#8cc63f"/>
+      <path d="M0 96 C 200 76, 420 88, 720 82 V120 H0Z" fill="#3c9b3f"/>
+      <path d="M0 108 C 220 92, 440 100, 720 96" stroke="#fff" stroke-width="2.5" fill="none" opacity=".9"/>
+      <path d="M0 118 C 220 104, 440 112, 720 108" stroke="#fff" stroke-width="2.5" fill="none" opacity=".9"/>
+      <g fill="#2e8b3a"><circle cx="70" cy="52" r="20"/><circle cx="92" cy="58" r="16"/><rect x="78" y="62" width="4" height="18" fill="#5b4a2e"/></g>
+      <g fill="#5fae3a"><circle cx="640" cy="44" r="22"/><circle cx="664" cy="52" r="16"/><rect x="648" y="58" width="4" height="20" fill="#5b4a2e"/></g>
+      <path d="M200 98 l7 -16 l7 16z" fill="#f39a1e"/><rect x="198" y="96" width="18" height="3" rx="1" fill="#f39a1e"/>
+      <path d="M520 92 l6 -14 l6 14z" fill="#f39a1e"/><rect x="518" y="90" width="16" height="3" rx="1" fill="#f39a1e"/>
+      <circle cx="360" cy="94" r="9" fill="#fff" stroke="#173d22" stroke-width="2"/><path d="M356 90l4 2 4-2-1 5h-6z" fill="#173d22"/>
+    </svg>
+  </header>
+
+  <form id="form" novalidate>
+    <section class="card">
+      <div class="step"><b>1</b><h2>פרטי ההורה</h2></div>
+      <label class="f" id="f-name"><span>שם מלא <em>*</em></span>
+        <input type="text" id="name" autocomplete="name" placeholder="שם פרטי ומשפחה">
+        <div class="err">נא למלא שם פרטי ומשפחה</div>
+      </label>
+      <label class="f" id="f-phone"><span>טלפון נייד <em>*</em></span>
+        <input type="tel" id="phone" autocomplete="tel" inputmode="tel" placeholder="050-0000000" dir="ltr" style="text-align:right">
+        <div class="err">מספר הטלפון לא נראה תקין</div>
+      </label>
+      <div class="f" id="f-kids">
+        <span class="klabel">שכבה וכיתה <em>*</em></span>
+        <div id="kids"></div>
+        <button type="button" class="addkid" id="addKid">+ יש לי עוד ילד/ה בבית הספר</button>
+        <div class="err">נא לבחור שכבה ולמלא מס׳ כיתה</div>
+      </div>
+    </section>
+
+    <section class="card" id="f-slots">
+      <div class="step"><b>2</b><div><h2>במה תרצו לעזור?</h2><small>אפשר לבחור כמה משמרות, אם הן לא חופפות בזמן</small></div></div>
+      <div id="slots"><div class="skeleton"></div><div class="skeleton"></div><div class="skeleton"></div></div>
+      <div class="err" style="margin-top:4px">נא לבחור לפחות משמרת אחת</div>
+    </section>
+
+    <section class="card">
+      <div class="step"><b>3</b><h2>הערות</h2></div>
+      <label class="f" style="margin-bottom:0"><span style="font-weight:400;color:var(--muted)">אילוצים, העדפה לתחנה מסוימת, או כל דבר שחשוב שנדע</span>
+        <textarea id="notes" maxlength="800"></textarea>
+      </label>
+    </section>
+
+    <div class="formerr" id="formErr"></div>
+    <button class="submit" id="submit" type="submit">שליחת ההרשמה</button>
+    <div class="privacy">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>
+      הפרטים נשמרים אצל רכזת המתנדבים בלבד
+    </div>
+  </form>
+
+  <section class="card done" id="done" hidden>
+    <div class="big"><svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></div>
+    <h2 id="doneTitle">תודה!</h2>
+    <p>ההרשמה התקבלה. נתראה ביום הספורט.</p>
+    <div class="arrive" id="arrive"></div>
+    <div class="summary" id="summary"></div>
+    <p id="assignNote" style="font-size:14px;color:var(--muted)"></p>
+    <button class="ghost" id="again" type="button">הרשמה של הורה נוסף</button>
+  </section>
+</div>
+
+<div class="scrim" id="dup">
+  <div class="dlg" role="dialog" aria-modal="true">
+    <h3>כבר נרשמת עם המספר הזה</h3>
+    <p id="dupText">להחליף את ההרשמה הקודמת בפרטים החדשים?</p>
+    <div class="btns"><button class="pri" id="dupYes">כן, לעדכן</button><button id="dupNo">ביטול</button></div>
+  </div>
+</div>
+
+<script>
+(function(){
+  var DEMO = /[?&]demo=1/.test(location.search);
+  var cfg = null, sel = [], kids = [{grade:'',cls:''}];
+  var $ = function(id){ return document.getElementById(id); };
+
+  var DEMO_CFG = {
+    title:'יום ספורט 2026', date:'יום שישי, 27.11.2026', school:'בית הספר שמעון פרס',
+    grades:['א׳','ב׳','ג׳','ד׳','ה׳','ו׳'],
+    slots:[
+      {id:'setup',group:'הכנות',title:'ארגון התחנות',time:'07:00–07:45',need:4,desc:'פריסת ציוד והכנת התחנות לפני שהילדים מגיעים',conflicts:[]},
+      {id:'cut',group:'הכנות',title:'חיתוך פירות וירקות',time:'07:00–08:30',need:6,desc:'הכנת פירות וירקות בחדר המורים',conflicts:['sport1','fruit1','workshop']},
+      {id:'sport1',group:'סבב א׳',title:'הפעלת תחנת ספורט',time:'07:45–09:30',need:44,desc:'אתלטיקה ומשחקי חצר – השיבוץ לתחנה יישלח לפני האירוע',conflicts:['cut','fruit1','workshop']},
+      {id:'fruit1',group:'סבב א׳',title:'חילוק פירות וירקות',time:'07:45–09:30',need:2,desc:'עמדת פירות ברחבי בית הספר',conflicts:['cut','sport1','workshop']},
+      {id:'sport2',group:'סבב ב׳',title:'הפעלת תחנת ספורט',time:'09:15–10:30',need:44,desc:'אתלטיקה ומשחקי חצר – השיבוץ לתחנה יישלח לפני האירוע',conflicts:['fruit2','workshop']},
+      {id:'fruit2',group:'סבב ב׳',title:'חילוק פירות וירקות',time:'09:15–10:30',need:2,desc:'עמדת פירות ברחבי בית הספר',conflicts:['sport2','workshop']},
+      {id:'workshop',group:'סדנאות',title:'ליווי בהעברת סדנה',time:'08:15–10:15',need:5,desc:'ליווי ועזרה למדריכי הסדנאות (ספורט ואורח חיים בריא)',conflicts:['cut','sport1','fruit1','sport2','fruit2']},
+      {id:'teardown',group:'סיום',title:'פירוק התחנות',time:'10:30–11:00',need:4,desc:'איסוף ציוד והחזרת החצר לסדרה',conflicts:[]}
+    ],
+    counts:{setup:3,cut:6,sport1:23,fruit1:1,sport2:17,fruit2:0,workshop:2,teardown:1}
+  };
+
+  var API = 'https://script.google.com/macros/s/AKfycbyB52qgIWm5AbF0od5vb8_vHW0Nkcm5MeHzJESmOphu5nWVfyx6onN_BmSGJ3I67MYxpw/exec';
+  function call(fn, payload){
+    if (DEMO) return new Promise(function(res){ setTimeout(function(){
+      res(fn==='getPublicData' ? JSON.parse(JSON.stringify(DEMO_CFG)) : {status:'ok',counts:DEMO_CFG.counts}); },500); });
+    return fetch(API, { method:'POST', credentials:'omit', redirect:'follow',
+      headers:{'Content-Type':'text/plain;charset=utf-8'}, body: JSON.stringify({action:fn, payload:payload}) })
+      .then(function(r){ return r.json(); })
+      .then(function(j){ if(!j.ok) throw new Error(j.error||'שגיאה'); return j.data; });
+  }
+
+  function el(tag, cls, text){ var e=document.createElement(tag); if(cls) e.className=cls; if(text!=null) e.textContent=text; return e; }
+  function slotById(id){ return cfg.slots.filter(function(s){return s.id===id;})[0]; }
+  function label(s){ return s.title + (s.group.indexOf('סבב')===0 ? ' · ' + s.group : ''); }
+
+  function renderKids(){
+    var box=$('kids'); box.innerHTML='';
+    kids.forEach(function(k,i){
+      var row=el('div','kid'+(kids.length===1?' solo':''));
+      if (kids.length>1) row.appendChild(el('div','kn','ילד/ה '+(i+1)));
+      var chips=el('div','chips');
+      cfg.grades.forEach(function(g){
+        var b=el('button','chip',g); b.type='button'; b.setAttribute('aria-pressed', String(g===k.grade));
+        b.onclick=function(){ k.grade=g; renderKids(); $('f-kids').classList.remove('invalid'); };
+        chips.appendChild(b);
+      });
+      row.appendChild(chips);
+      var inp=el('input'); inp.type='text'; inp.inputMode='numeric'; inp.maxLength=6; inp.placeholder='מס׳ כיתה'; inp.value=k.cls;
+      inp.oninput=function(){ k.cls=inp.value; $('f-kids').classList.remove('invalid'); };
+      row.appendChild(inp);
+      if (kids.length>1){ var rm=el('button','rm','×'); rm.type='button'; rm.title='הסרה'; rm.onclick=function(){ kids.splice(i,1); renderKids(); }; row.appendChild(rm); }
+      box.appendChild(row);
+    });
+    $('addKid').hidden = kids.length>=6;
+  }
+
+  function conflictWith(s){
+    for (var i=0;i<sel.length;i++){ if (s.conflicts.indexOf(sel[i])>=0) return slotById(sel[i]); }
+    return null;
+  }
+
+  function renderSlots(){
+    var box=$('slots'); box.innerHTML='';
+    var groups=[];
+    cfg.slots.forEach(function(s){ if (groups.indexOf(s.group)<0) groups.push(s.group); });
+    groups.forEach(function(g){
+      var gw=el('div','group'); var gh=el('div','ghead'); gh.appendChild(el('i')); gh.appendChild(document.createTextNode(g)); gw.appendChild(gh);
+      cfg.slots.filter(function(s){return s.group===g;}).forEach(function(s){
+        var on = sel.indexOf(s.id)>=0, c = on ? null : conflictWith(s);
+        var b=el('button','slot'); b.type='button'; b.setAttribute('aria-pressed',String(on));
+        if (c) b.disabled=true;
+        var t=el('span','tick'); t.innerHTML='<svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>';
+        b.appendChild(t);
+        var body=el('span','sbody');
+        var top=el('span','stop'); top.appendChild(el('span','stitle',s.title)); top.appendChild(el('span','stime',s.time));
+        body.appendChild(top);
+        body.appendChild(el('div','sdesc',s.desc));
+        var n=(cfg.counts&&cfg.counts[s.id])||0, full=n>=s.need;
+        var cap=el('div','cap'+(full?' full':''));
+        var bar=el('span','bar'); var fill=el('i'); fill.style.width=Math.min(100,Math.round(n/s.need*100))+'%'; bar.appendChild(fill);
+        cap.appendChild(bar);
+        cap.appendChild(el('span','note', full ? 'מלא · אפשר להירשם כמחליף/ה' : 'חסרים עוד '+(s.need-n)+' מתוך '+s.need));
+        body.appendChild(cap);
+        if (c) body.appendChild(el('div','conf','חופף למשמרת שבחרת: '+label(c)));
+        b.appendChild(body);
+        b.onclick=function(){
+          var i=sel.indexOf(s.id);
+          if (i>=0) sel.splice(i,1); else sel.push(s.id);
+          $('f-slots').classList.remove('invalid');
+          renderSlots();
+        };
+        gw.appendChild(b);
+      });
+      box.appendChild(gw);
+    });
+  }
+
+  function normPhone(p){ var d=String(p||'').replace(/\D/g,''); if(d.indexOf('972')===0) d='0'+d.slice(3); return d; }
+
+  function validate(){
+    var ok=true;
+    function mark(id,bad){ $(id).classList.toggle('invalid',bad); if(bad) ok=false; }
+    mark('f-name', $('name').value.trim().length<2);
+    mark('f-phone', !/^0\d{8,9}$/.test(normPhone($('phone').value)));
+    mark('f-kids', kids.some(function(k){ return !k.grade || !String(k.cls).trim(); }));
+    mark('f-slots', sel.length===0);
+    if(!ok){ var f=document.querySelector('.invalid'); if(f) f.scrollIntoView({behavior:'smooth',block:'center'}); }
+    return ok;
+  }
+
+  function payload(over){
+    return { name:$('name').value.trim(), phone:$('phone').value, kids:kids.map(function(k){ return {grade:k.grade, cls:String(k.cls).trim()}; }),
+      slots:sel.slice(), notes:$('notes').value.trim(), overwrite:!!over };
+  }
+
+  function send(over){
+    var btn=$('submit'); btn.disabled=true; btn.textContent='שולחים…'; $('formErr').style.display='none';
+    call('submitRegistration', payload(over)).then(function(r){
+      btn.disabled=false; btn.textContent='שליחת ההרשמה';
+      if (r.status==='exists'){
+        $('dupText').textContent='נמצאה הרשמה קודמת'+(r.name?' על שם '+r.name:'')+'. להחליף אותה בפרטים החדשים?';
+        $('dup').classList.add('on'); return;
+      }
+      cfg.counts=r.counts; showDone();
+    }).catch(function(e){
+      btn.disabled=false; btn.textContent='שליחת ההרשמה';
+      var m=(e&&e.message)||String(e); m=m.replace(/^Error:\s*/,'');
+      $('formErr').textContent='לא הצלחנו לשלוח: '+m; $('formErr').style.display='block';
+    });
+  }
+
+  function showDone(){
+    var first=$('name').value.trim().split(/\s+/)[0];
+    $('doneTitle').textContent='תודה, '+first+'!';
+    var chosen=cfg.slots.filter(function(s){return sel.indexOf(s.id)>=0;});
+    var times=chosen.map(function(s){ var m=s.time.match(/^(\d\d):(\d\d)/); return m?m[0]:null; }).filter(Boolean).sort();
+    var arr = times.length ? times[0] : null;
+    if (sel.indexOf('cut')>=0 || sel.indexOf('setup')>=0) arr='07:00';
+    $('arrive').textContent = arr ? 'הגעה ב-'+arr : 'נעדכן אותך בשעת ההגעה';
+    var sum=$('summary'); sum.innerHTML='';
+    chosen.forEach(function(s){ var d=el('div'); d.appendChild(el('span','',label(s))); d.appendChild(el('span','',s.time)); sum.appendChild(d); });
+    $('assignNote').textContent = (sel.indexOf('sport1')>=0||sel.indexOf('sport2')>=0||sel.indexOf('workshop')>=0)
+      ? 'נשלח אליך הודעה עם התחנה שלך לפני האירוע.' : '';
+    $('form').hidden=true; $('done').hidden=false; window.scrollTo({top:0,behavior:'smooth'});
+  }
+
+  $('form').addEventListener('submit',function(e){ e.preventDefault(); if(validate()) send(false); });
+  $('dupYes').onclick=function(){ $('dup').classList.remove('on'); send(true); };
+  $('dupNo').onclick=function(){ $('dup').classList.remove('on'); };
+  $('again').onclick=function(){
+    $('form').reset(); sel=[]; kids=[{grade:'',cls:''}]; renderKids(); renderSlots();
+    $('done').hidden=true; $('form').hidden=false; window.scrollTo({top:0});
+    call('getPublicData').then(function(c){ cfg=c; renderSlots(); });
+  };
+  $('addKid').onclick=function(){ if(kids.length<6){ kids.push({grade:'',cls:''}); renderKids(); } };
+  ['name','phone'].forEach(function(id){ $(id).addEventListener('input',function(){ $('f-'+id).classList.remove('invalid'); }); });
+
+  if (DEMO) $('demoNote').hidden=false;
+  call('getPublicData').then(function(c){
+    cfg=c;
+    var m=String(c.date||'').match(/^(.*?),\s*(\d{1,2})\.(\d{1,2})/);
+    if(m){ $('dDay').textContent='ב'+m[1].trim(); $('dDate').textContent=m[2]+'/'+m[3]; }
+    if (c.school) $('school').textContent='ב'+c.school;
+    renderKids(); renderSlots();
+  }).catch(function(){
+    $('slots').innerHTML=''; $('formErr').textContent='לא הצלחנו לטעון את הטופס. נסו לרענן את הדף.'; $('formErr').style.display='block';
+  });
+})();
+</script>
+</body>
+</html>
