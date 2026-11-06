@@ -101,6 +101,7 @@
   .cap .note{font-weight:600}
   .cap.full .note{color:var(--green-d)}
   .conf{font-size:12.5px;color:var(--coral);margin-top:6px}
+  .cap.loading .bar{background:linear-gradient(90deg,#eef4e6,#f8fbf2,#eef4e6);background-size:200% 100%;animation:sh 1.2s infinite}
 
   .submit{width:100%;font:inherit;font-family:Rubik;font-weight:800;font-size:19px;color:#fff;background:var(--green-d);border:none;border-radius:18px 24px 16px 22px;padding:17px;cursor:pointer;box-shadow:0 12px 26px -12px rgba(31,106,46,.9);transition:transform .1s,filter .15s}
   .submit:hover{filter:brightness(1.1)}
@@ -148,7 +149,7 @@
 
     <span class="std">הרשמה <em>למתנדבים</em></span><br>
     <h1 id="title">יום ספורט</h1>
-    <div class="school" id="school">בבית הספר שמעון פרס</div>
+    <div class="school" id="school">בבית הספר הירוק ע״ש שמעון פרס</div>
     <div class="datebox">
       <svg width="38" height="38" viewBox="0 0 24 24" fill="none" stroke="#173d22" stroke-width="1.8"><rect x="3" y="5" width="18" height="16" rx="3"/><path d="M3 10h18M8 3v4M16 3v4"/><circle cx="8" cy="14" r=".6" fill="#173d22"/><circle cx="12" cy="14" r=".6" fill="#173d22"/><circle cx="16" cy="14" r=".6" fill="#173d22"/><circle cx="8" cy="17.5" r=".6" fill="#173d22"/><circle cx="12" cy="17.5" r=".6" fill="#173d22"/></svg>
       <span class="sep"></span>
@@ -236,7 +237,7 @@
   var $ = function(id){ return document.getElementById(id); };
 
   var DEMO_CFG = {
-    title:'יום ספורט 2026', date:'יום שישי, 27.11.2026', school:'בית הספר שמעון פרס',
+    title:'יום ספורט 2026', date:'יום שישי, 27.11.2026', school:'בית הספר הירוק ע״ש שמעון פרס',
     grades:['א׳','ב׳','ג׳','ד׳','ה׳','ו׳'],
     slots:[
       {id:'setup',group:'הכנות',title:'ארגון התחנות',time:'07:00–07:45',need:4,desc:'פריסת ציוד והכנת התחנות לפני שהילדים מגיעים',conflicts:[]},
@@ -251,10 +252,13 @@
     counts:{setup:3,cut:6,sport1:23,fruit1:1,sport2:17,fruit2:0,workshop:2,teardown:1}
   };
 
+  // הגדרות מובנות – הטופס מוצג מיד, והמספרים מתעדכנים מהגיליון
+  var BOOT_CFG = {"title":"יום ספורט 2026","date":"יום שישי, 27.11.2026","school":"בית הספר הירוק ע״ש שמעון פרס","grades":["א׳","ב׳","ג׳","ד׳","ה׳","ו׳"],"slots":[{"id":"setup","group":"הכנות","title":"הקמת התחנות","time":"07:00–08:00","need":4,"desc":"פריסת ציוד והכנת התחנות לפני שהילדים מגיעים","conflicts":["cut"]},{"id":"cut","group":"הכנות","title":"חיתוך פירות וירקות","time":"07:00–08:30","need":6,"desc":"הכנת פירות וירקות בחדר המורים","conflicts":["setup","sport1","fruit1","workshop"]},{"id":"sport1","group":"סבב א׳","title":"הפעלת תחנת ספורט","time":"07:45–09:30","need":44,"desc":"מתחיל בתדרוך קצר – אפשר להירשם לשני הסבבים","conflicts":["cut","fruit1","workshop"]},{"id":"fruit1","group":"סבב א׳","title":"חילוק פירות וירקות","time":"07:45–09:30","need":2,"desc":"עמדת פירות ברחבי בית הספר","conflicts":["cut","sport1","workshop"]},{"id":"sport2","group":"סבב ב׳","title":"הפעלת תחנת ספורט","time":"09:00–10:15","need":44,"desc":"מתחיל בתדרוך קצר – אפשר להירשם לשני הסבבים","conflicts":["fruit2","workshop"]},{"id":"fruit2","group":"סבב ב׳","title":"חילוק פירות וירקות","time":"09:00–10:15","need":2,"desc":"עמדת פירות ברחבי בית הספר","conflicts":["sport2","workshop"]},{"id":"workshop","group":"סדנאות","title":"ליווי בהעברת סדנה","time":"08:15–10:15","need":5,"desc":"ליווי ועזרה למדריכי הסדנאות (ספורט ואורח חיים בריא)","conflicts":["cut","sport1","fruit1","sport2","fruit2"]},{"id":"teardown","group":"סיום","title":"פירוק התחנות","time":"10:30–11:30","need":4,"desc":"איסוף ציוד והחזרת החצר לסדרה","conflicts":[]}],"counts":null};
+
   var API = 'https://script.google.com/macros/s/AKfycbyB52qgIWm5AbF0od5vb8_vHW0Nkcm5MeHzJESmOphu5nWVfyx6onN_BmSGJ3I67MYxpw/exec';
   function call(fn, payload){
     if (DEMO) return new Promise(function(res){ setTimeout(function(){
-      res(fn==='getPublicData' ? JSON.parse(JSON.stringify(DEMO_CFG)) : {status:'ok',counts:DEMO_CFG.counts}); },500); });
+      res(fn==='getPublicData' ? Object.assign(JSON.parse(JSON.stringify(BOOT_CFG)),{counts:DEMO_CFG.counts}) : {status:'ok',counts:DEMO_CFG.counts}); },500); });
     return fetch(API, { method:'POST', credentials:'omit', redirect:'follow',
       headers:{'Content-Type':'text/plain;charset=utf-8'}, body: JSON.stringify({action:fn, payload:payload}) })
       .then(function(r){ return r.json(); })
@@ -307,11 +311,12 @@
         var top=el('span','stop'); top.appendChild(el('span','stitle',s.title)); top.appendChild(el('span','stime',s.time));
         body.appendChild(top);
         body.appendChild(el('div','sdesc',s.desc));
-        var n=(cfg.counts&&cfg.counts[s.id])||0, full=n>=s.need;
+        var known=!!cfg.counts, n=(known&&cfg.counts[s.id])||0, full=known&&n>=s.need;
         var cap=el('div','cap'+(full?' full':''));
         var bar=el('span','bar'); var fill=el('i'); fill.style.width=Math.min(100,Math.round(n/s.need*100))+'%'; bar.appendChild(fill);
         cap.appendChild(bar);
-        cap.appendChild(el('span','note', full ? 'מלא · אפשר להירשם כמחליף/ה' : 'חסרים עוד '+(s.need-n)+' מתוך '+s.need));
+        if(!known){ cap.className='cap loading'; }
+        cap.appendChild(el('span','note', !known ? 'בודקים כמה מקומות נותרו…' : full ? 'מלא · אפשר להירשם כמחליף/ה' : 'חסרים עוד '+(s.need-n)+' מתוך '+s.need));
         body.appendChild(cap);
         if (c) body.appendChild(el('div','conf','חופף למשמרת שבחרת: '+label(c)));
         b.appendChild(body);
@@ -388,14 +393,20 @@
   ['name','phone'].forEach(function(id){ $(id).addEventListener('input',function(){ $('f-'+id).classList.remove('invalid'); }); });
 
   if (DEMO) $('demoNote').hidden=false;
-  call('getPublicData').then(function(c){
-    cfg=c;
+  function applyHeader(c){
     var m=String(c.date||'').match(/^(.*?),\s*(\d{1,2})\.(\d{1,2})/);
     if(m){ $('dDay').textContent='ב'+m[1].trim(); $('dDate').textContent=m[2]+'/'+m[3]; }
     if (c.school) $('school').textContent='ב'+c.school;
-    renderKids(); renderSlots();
+  }
+  cfg = JSON.parse(JSON.stringify(BOOT_CFG));
+  applyHeader(cfg); renderKids(); renderSlots();
+  call('getPublicData').then(function(c){
+    // שומרים בחירות שכבר נעשו; מסירים משמרות שכבר לא קיימות
+    var ids=c.slots.map(function(s){return s.id;});
+    sel=sel.filter(function(id){return ids.indexOf(id)>=0;});
+    cfg=c; applyHeader(c); renderSlots();
   }).catch(function(){
-    $('slots').innerHTML=''; $('formErr').textContent='לא הצלחנו לטעון את הטופס. נסו לרענן את הדף.'; $('formErr').style.display='block';
+    $('formErr').textContent='לא הצלחנו לבדוק כמה מקומות נותרו. אפשר להירשם בכל זאת, ואם השליחה נכשלת – נסו לרענן.'; $('formErr').style.display='block';
   });
 })();
 </script>
