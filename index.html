@@ -316,8 +316,9 @@
         var bar=el('span','bar'); var fill=el('i'); fill.style.width=Math.min(100,Math.round(n/s.need*100))+'%'; bar.appendChild(fill);
         cap.appendChild(bar);
         if(!known){ cap.className='cap loading'; }
-        cap.appendChild(el('span','note', !known ? 'בודקים כמה מקומות נותרו…' : full ? 'מלא · אפשר להירשם כמחליף/ה' : 'חסרים עוד '+(s.need-n)+' מתוך '+s.need));
+        cap.appendChild(el('span','note', !known ? 'בודקים כמה מקומות נותרו…' : full ? 'המשמרת מלאה' : 'חסרים עוד '+(s.need-n)+' מתוך '+s.need));
         body.appendChild(cap);
+        if (full && !on) b.disabled=true;
         if (c) body.appendChild(el('div','conf','חופף למשמרת שבחרת: '+label(c)));
         b.appendChild(body);
         b.onclick=function(){
@@ -354,6 +355,15 @@
     var btn=$('submit'); btn.disabled=true; btn.textContent='שולחים…'; $('formErr').style.display='none';
     call('submitRegistration', payload(over)).then(function(r){
       btn.disabled=false; btn.textContent='שליחת ההרשמה';
+      if (r.status==='full'){
+        cfg.counts=r.counts;
+        var names=r.slots.map(function(id){ var s=slotById(id); return s?label(s):id; }).join(', ');
+        sel=sel.filter(function(id){ return r.slots.indexOf(id)<0; });
+        renderSlots();
+        $('formErr').textContent='המשמרת '+names+' התמלאה בינתיים. אפשר לבחור משמרת אחרת ולשלוח שוב.'; $('formErr').style.display='block';
+        $('f-slots').scrollIntoView({behavior:'smooth',block:'start'});
+        return;
+      }
       if (r.status==='exists'){
         $('dupText').textContent='נמצאה הרשמה קודמת'+(r.name?' על שם '+r.name:'')+'. להחליף אותה בפרטים החדשים?';
         $('dup').classList.add('on'); return;
@@ -403,7 +413,7 @@
   call('getPublicData').then(function(c){
     // שומרים בחירות שכבר נעשו; מסירים משמרות שכבר לא קיימות
     var ids=c.slots.map(function(s){return s.id;});
-    sel=sel.filter(function(id){return ids.indexOf(id)>=0;});
+    sel=sel.filter(function(id){ var s=c.slots.filter(function(x){return x.id===id;})[0]; return s && ((c.counts&&c.counts[id])||0) < s.need; });
     cfg=c; applyHeader(c); renderSlots();
   }).catch(function(){
     $('formErr').textContent='לא הצלחנו לבדוק כמה מקומות נותרו. אפשר להירשם בכל זאת, ואם השליחה נכשלת – נסו לרענן.'; $('formErr').style.display='block';
